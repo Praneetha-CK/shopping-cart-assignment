@@ -125,7 +125,7 @@ const CartItem = ({
           <div className="d-flex align-items-center">
             <Button
               className="btn-primary btn-circle"
-              disabled={qty === 1}
+              // disabled={qty === 1}
               onClick={() => decrementQuantity(id)}
             >
               -

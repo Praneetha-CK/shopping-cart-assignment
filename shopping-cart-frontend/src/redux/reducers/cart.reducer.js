@@ -1,7 +1,10 @@
 export function cart(cartData = [], action) {
   switch (action.type) {
     case "DELETE_FROM_CART": {
-      return cartData.filter((cartItem) => cartItem.id !== action.productId);
+      return removeFromCart({
+        cartData,
+        productId: action.productId,
+      });
     }
     case "ADD_TO_CART": {
       const index = cartData.findIndex((c) => c.id === action.cartItem.id);
@@ -16,9 +19,15 @@ export function cart(cartData = [], action) {
     case "DECREMENT_QUANTIY": {
       const index = cartData.findIndex((c) => c.id === action.productId);
 
-      const modifiedCart = quantityModify(cartData, "-", index);
-
-      return modifiedCart;
+      if (cartData[index].qty === 1) {
+        return removeFromCart({
+          cartData,
+          productId: action.productId,
+        });
+      } else {
+        const modifiedCart = quantityModify(cartData, "-", index);
+        return modifiedCart;
+      }
     }
 
     default:
@@ -40,4 +49,8 @@ const quantityModify = (cartData, operator, index) => {
     },
     ...cartData.slice(index + 1),
   ];
+};
+
+const removeFromCart = ({ cartData, productId }) => {
+  return cartData.filter((cartItem) => cartItem.id !== productId);
 };
