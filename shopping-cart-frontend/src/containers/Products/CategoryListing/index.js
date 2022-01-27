@@ -10,8 +10,6 @@ import { useWindowSize } from "../../../hooks/useWindowSize";
 export const CategoryListing = () => {
   const [{ apiData: categories = [] }] = useFetch(api.categories);
 
-  const sortedCategories = categories?.sort((a, b) => a.order - b.order);
-
   let [searchParams] = useSearchParams();
 
   const [selectedCategory, setCategory] = useState("");
@@ -24,8 +22,6 @@ export const CategoryListing = () => {
     }
   }, [categories, searchParams]);
 
-  const { sm } = useWindowSize();
-
   const selectedCategoryName = useMemo(() => {
     return categories.find((cat) => cat.id === selectedCategory);
   }, [selectedCategory, categories]);
@@ -33,6 +29,9 @@ export const CategoryListing = () => {
   const onDropdownToggle = () => {
     setToggle(!toggle);
   };
+
+  const sortedCategories = categories?.sort((a, b) => a.order - b.order);
+  const { sm } = useWindowSize();
 
   return (
     <div className="category-listing">

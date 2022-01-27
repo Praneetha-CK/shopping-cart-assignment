@@ -14,12 +14,13 @@ import "./Cart.scss";
 export const Cart = () => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
-  const { cart } = useSelector((store) => store);
 
   const ref = useRef(null);
   const mobileCartRef = useRef(null);
 
-  const cartTotal = cart.reduce((sum, { qty }) => sum + qty, 0);
+  const { cart } = useSelector((store) => store);
+
+  const { tab } = useWindowSize();
 
   const handleClick = (event) => {
     if (!cartTotal) return;
@@ -31,9 +32,10 @@ export const Cart = () => {
     setShow(false);
     setTarget(null);
   };
-  const { tab } = useWindowSize();
 
   useOnClickOutside(mobileCartRef, onHide);
+
+  const cartTotal = cart.reduce((sum, { qty }) => sum + qty, 0);
 
   return (
     <div className="cart">

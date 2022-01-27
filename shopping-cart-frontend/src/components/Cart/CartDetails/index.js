@@ -15,14 +15,11 @@ import { useWindowSize } from "../../../hooks/useWindowSize";
 import { useLockBodyScroll } from "../../../hooks/useLockBodyScroll";
 
 export const CartDetails = ({ onClose }) => {
-  const { tab } = useWindowSize();
-
-  useLockBodyScroll({ disable: !tab });
-
   const { cart } = useSelector((store) => store);
   const dispatch = useDispatch();
 
-  const cartTotalQty = cart.reduce((sum, { qty }) => sum + qty, 0);
+  const { tab } = useWindowSize();
+  useLockBodyScroll({ disable: !tab });
 
   const incrementQuantity = (id) => {
     dispatch(
@@ -40,6 +37,7 @@ export const CartDetails = ({ onClose }) => {
     dispatch(deleteFromCart(id));
   };
 
+  const cartTotalQty = cart.reduce((sum, { qty }) => sum + qty, 0);
   const totalPrice = cart.reduce((sum, { price, qty }) => sum + price * qty, 0);
 
   return (
