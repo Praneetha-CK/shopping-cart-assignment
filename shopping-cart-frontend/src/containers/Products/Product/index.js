@@ -34,7 +34,7 @@ export const Product = ({ description, id, imageURL, name, price }) => {
         <Card.Img variant="top" src={imageURL} />
         <Card.Body>
           <Card.Text className="description p-2">{description}</Card.Text>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between align-items-center">
             <div className="price">MRP Rs. {price}</div>
             <Button
               className="btn-primary"

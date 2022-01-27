@@ -41,7 +41,7 @@ export const Products = () => {
                   lg={3}
                   md={6}
                   sm={12}
-                  className="d-flex m-0 p-1"
+                  className="d-flex m-0 px-1 px-sm-0"
                   key={product.id}
                 >
                   <Product {...product} />
