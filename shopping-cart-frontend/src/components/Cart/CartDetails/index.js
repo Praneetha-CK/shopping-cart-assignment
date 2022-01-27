@@ -76,31 +76,13 @@ export const CartDetails = ({ onClose }) => {
             </div>
           </div>
         ) : (
-          <div className="cart-empty">
-            <h4>No items in your cart</h4>
-
-            <h6>Your favourite items are just a click away</h6>
-          </div>
+          CartEmpty
         )}
-        <div className="cart-modal-footer p-2">
-          {cartTotalQty > 0 && "Promo code can be applied on payment page"}
-
-          <Button
-            className={`btn-primary justify-content-between w-100 my-2 ${
-              cartTotalQty && "d-flex"
-            }`}
-            onClick={onClose}
-          >
-            {cartTotalQty ? (
-              <>
-                Proceed to Checkout
-                <span>Rs.{totalPrice} &gt;</span>
-              </>
-            ) : (
-              "Start Shopping"
-            )}
-          </Button>
-        </div>
+        <CartFooter
+          cartTotalQty={cartTotalQty}
+          onClose={onClose}
+          totalPrice={totalPrice}
+        />
       </Popover.Body>
     </>
   );
@@ -125,7 +107,6 @@ const CartItem = ({
           <div className="d-flex align-items-center">
             <Button
               className="btn-primary btn-circle"
-              // disabled={qty === 1}
               onClick={() => decrementQuantity(id)}
             >
               -
@@ -149,6 +130,38 @@ const CartItem = ({
           <div className="price">Rs.{qty * price}</div>
         </div>
       </div>
+    </div>
+  );
+};
+
+const CartEmpty = (
+  <div className="cart-empty">
+    <h4>No items in your cart</h4>
+
+    <h6>Your favourite items are just a click away</h6>
+  </div>
+);
+
+const CartFooter = ({ cartTotalQty, onClose, totalPrice }) => {
+  return (
+    <div className="cart-modal-footer p-2">
+      {cartTotalQty > 0 && "Promo code can be applied on payment page"}
+
+      <Button
+        className={`btn-primary justify-content-between w-100 my-2 ${
+          cartTotalQty && "d-flex"
+        }`}
+        onClick={onClose}
+      >
+        {cartTotalQty ? (
+          <>
+            Proceed to Checkout
+            <span>Rs.{totalPrice} &gt;</span>
+          </>
+        ) : (
+          "Start Shopping"
+        )}
+      </Button>
     </div>
   );
 };
