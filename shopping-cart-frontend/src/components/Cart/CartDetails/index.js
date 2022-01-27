@@ -81,7 +81,7 @@ export const CartDetails = ({ onClose }) => {
           {cartTotalQty > 0 && "Promo code can be applied on payment page"}
 
           <Button
-            className={`btn-primary justify-content-between w-100 mt-2 ${
+            className={`btn-primary justify-content-between w-100 my-2 ${
               cartTotalQty && "d-flex"
             }`}
             onClick={onClose}

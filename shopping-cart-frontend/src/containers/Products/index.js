@@ -27,12 +27,12 @@ export const Products = () => {
 
   return (
     <Container className="products">
-      <Row>
+      <Row className="p-0">
         <Col lg={2} md={4}>
           <CategoryListing />
         </Col>
         <Col className="mt-1">
-          <Row className="product-listing px-2">
+          <Row className="product-listing px-lg-2">
             {filteredProducts.map((product, i) => {
               return (
                 <Col

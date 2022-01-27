@@ -19,6 +19,7 @@
   @include sm {
     height: unset;
     min-height: unset;
+    margin-top: 15px;
 
     .list-group-item {
       border: none;

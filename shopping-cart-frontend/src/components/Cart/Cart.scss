@@ -32,13 +32,14 @@
   @include tab {
     .mobile {
       display: block;
-      position: absolute;
+      position: fixed;
       z-index: 10;
       height: 100%;
-      width: 100%;
       left: 0;
       right: 0;
       background-color: #eee;
+      overflow: auto;
+      box-sizing: border-box;
     }
   }
 }

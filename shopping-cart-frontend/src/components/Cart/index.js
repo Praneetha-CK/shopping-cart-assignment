@@ -10,6 +10,7 @@ import { CartDetails } from "./CartDetails";
 import "./Cart.scss";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { useOnClickOutside } from "../../hooks/useOutsideClick";
+import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 
 export const Cart = () => {
   const [show, setShow] = useState(false);
@@ -35,6 +36,8 @@ export const Cart = () => {
   const { tab } = useWindowSize();
   useOnClickOutside(mobileCartRef, onHide);
 
+  useLockBodyScroll({ disable: tab });
+
   return (
     <div className="cart">
       <Button
@@ -54,7 +57,7 @@ export const Cart = () => {
       {tab ? (
         show && (
           <div className="mobile" ref={mobileCartRef}>
-            <CartDetails />
+            <CartDetails onClose={onHide} />
           </div>
         )
       ) : (
