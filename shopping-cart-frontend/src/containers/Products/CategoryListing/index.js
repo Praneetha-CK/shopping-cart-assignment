@@ -9,6 +9,9 @@ import { useWindowSize } from "../../../hooks/useWindowSize";
 
 export const CategoryListing = () => {
   const [{ apiData: categories = [] }] = useFetch(api.categories);
+
+  const sortedCategories = categories?.sort((a, b) => a.order - b.order);
+
   let [searchParams] = useSearchParams();
 
   const [selectedCategory, setCategory] = useState("");
@@ -47,7 +50,7 @@ export const CategoryListing = () => {
 
           <Dropdown.Menu>
             <List
-              categories={categories}
+              categories={sortedCategories}
               selectedCategory={selectedCategory}
               onClick={onDropdownToggle}
               sm={sm}
@@ -70,9 +73,10 @@ const List = ({ categories, selectedCategory, onClick, sm }) => {
 
   const onCategoryClick = (id) => {
     if (sm) {
-      navigate(`/products?cat_id=${id}`);
       onClick();
+      navigate(`/products?cat_id=${id}`);
     } else {
+      //	On clicking the selected category again, the filter will reset and all products will be displayed.
       if (selectedCategory === id) navigate(`/products`);
       else navigate(`/products?cat_id=${id}`);
     }

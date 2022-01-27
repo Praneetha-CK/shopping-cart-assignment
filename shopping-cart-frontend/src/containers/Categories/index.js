@@ -1,3 +1,4 @@
+import { Error } from "../../components/Error";
 import { api } from "../../constants";
 import { useFetch } from "../../hooks/useFetch";
 import { Banner } from "./Banner";
@@ -5,13 +6,16 @@ import "./Categories.scss";
 import { Category } from "./Category";
 
 export const Categories = () => {
-  const [{ apiData: categories = [] }] = useFetch(api.categories);
+  const [{ apiData: categories = [], error }] = useFetch(api.categories);
+
+  const sortedCategories = categories?.sort((a, b) => a.order - b.order);
 
   return (
     <div className="categories my-1">
+      {error && <Error />}
       <Banner />
 
-      {categories.map((category, i) => {
+      {sortedCategories.map((category, i) => {
         const isEven = i % 2 === 0;
         return category?.enabled ? (
           <Category

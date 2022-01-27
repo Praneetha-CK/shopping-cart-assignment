@@ -1,7 +1,7 @@
 import Carousel from "react-bootstrap/Carousel";
-import "./Banner.scss";
 import { useFetch } from "../../../hooks/useFetch";
 import { api } from "../../../constants";
+import "./Banner.scss";
 
 export const Banner = () => {
   const [{ apiData: banners = [] }] = useFetch(api.banners);

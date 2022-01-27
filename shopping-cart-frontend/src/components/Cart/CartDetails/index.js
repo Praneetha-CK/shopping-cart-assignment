@@ -1,19 +1,24 @@
-import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 
+import Button from "react-bootstrap/Button";
 import CloseButton from "react-bootstrap/CloseButton";
 import Popover from "react-bootstrap/Popover";
 import Image from "react-bootstrap/Image";
-
-import "./CartDetails.scss";
 import {
   AddToCart,
   decrementItemFromCart,
   deleteFromCart,
 } from "../../../redux/actions/actions";
 import { images } from "../../../assets/images";
+import "./CartDetails.scss";
+import { useWindowSize } from "../../../hooks/useWindowSize";
+import { useLockBodyScroll } from "../../../hooks/useLockBodyScroll";
 
 export const CartDetails = ({ onClose }) => {
+  const { tab } = useWindowSize();
+
+  useLockBodyScroll({ disable: !tab });
+
   const { cart } = useSelector((store) => store);
   const dispatch = useDispatch();
 

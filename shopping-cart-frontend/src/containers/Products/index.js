@@ -9,9 +9,10 @@ import { CategoryListing } from "./CategoryListing";
 import { useSearchParams } from "react-router-dom";
 import { useMemo } from "react";
 import { Product } from "./Product";
+import { Error } from "../../components/Error";
 
 export const Products = () => {
-  const [{ apiData: products = [] }] = useFetch(api.products);
+  const [{ apiData: products = [], error }] = useFetch(api.products);
 
   let [searchParams] = useSearchParams();
 
@@ -32,6 +33,7 @@ export const Products = () => {
           <CategoryListing />
         </Col>
         <Col className="mt-1">
+          {error && <Error />}
           <Row className="product-listing px-lg-2">
             {filteredProducts.map((product, i) => {
               return (

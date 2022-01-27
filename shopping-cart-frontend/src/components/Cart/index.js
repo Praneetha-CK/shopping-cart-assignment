@@ -5,12 +5,11 @@ import Button from "react-bootstrap/Button";
 import Popover from "react-bootstrap/Popover";
 import { ReactComponent as CartIcon } from "../../assets/images/cart.svg";
 import colors from "../../assets/colors.scss";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { useOnClickOutside } from "../../hooks/useOutsideClick";
 import { CartDetails } from "./CartDetails";
 
 import "./Cart.scss";
-import { useWindowSize } from "../../hooks/useWindowSize";
-import { useOnClickOutside } from "../../hooks/useOutsideClick";
-import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
 
 export const Cart = () => {
   const [show, setShow] = useState(false);
@@ -32,11 +31,9 @@ export const Cart = () => {
     setShow(false);
     setTarget(null);
   };
-
   const { tab } = useWindowSize();
-  useOnClickOutside(mobileCartRef, onHide);
 
-  useLockBodyScroll({ disable: tab });
+  useOnClickOutside(mobileCartRef, onHide);
 
   return (
     <div className="cart">
